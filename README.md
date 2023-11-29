@@ -1,4 +1,7 @@
-FastApproval [![Build Status](https://travis-ci.com/maxbechtold/fast-approval.svg?branch=master)](https://travis-ci.com/maxbechtold/fast-approval) [![Documentation Status](https://readthedocs.org/projects/approval/badge/?version=latest)](https://readthedocs.org/projects/approval/?badge=latest) [![Jitpack](https://jitpack.io/v/maxbechtold/fast-approval.svg)](https://jitpack.io/#maxbechtold/fast-approval)
+FastApproval 
+[![Java CI with Maven](https://github.com/maxbechtold/fast-approval/actions/workflows/maven.yml/badge.svg)](https://github.com/maxbechtold/fast-approval/actions/workflows/maven.yml)
+[![Documentation Status](https://readthedocs.org/projects/approval/badge/?version=latest)](https://readthedocs.org/projects/approval/?badge=latest)
+[![Jitpack](https://jitpack.io/v/maxbechtold/fast-approval.svg)](https://jitpack.io/#maxbechtold/fast-approval)
 =======
 Approval is an open source assertion/verification library to aid unit testing. *FastApproval* makes it even more fun. 
 
@@ -28,7 +31,7 @@ There are currently no dependencies for the project.
 
 Build and Release
 ---
-We use TravisCI to build and test *FastApproval*. In order to release a new version, `mvn release:prepare release:clean` is enough (no deployment, as binaries are created on-the-fly with JitPack).
+*FastApproval* is built with Maven and GitHub Actions. In order to release a new version, `mvn release:prepare release:clean` is enough (no deployment, as binaries are created on-the-fly with JitPack).
 
 ## LICENSE
 [Apache 2.0 License](https://github.com/maxbechtold/fast-approval/blob/master/LICENSE.txt)
