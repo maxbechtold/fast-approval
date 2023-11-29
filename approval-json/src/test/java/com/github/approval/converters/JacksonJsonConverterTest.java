@@ -48,8 +48,9 @@ public class JacksonJsonConverterTest {
     public void shouldCreateProperSerializationWithSaneDefaults() throws Exception {
         final JacksonJsonConverter<Entity> converter = JacksonJsonConverter.getInstanceWithSaneDefaults();
 
+        // TODO Jackson doesn't serialize Date(0) at all on Windows
         Assert.assertThat(converter.getStringForm(entity), CoreMatchers.equalTo(
-                "{\n  \"age\" : 10,\n  \"firstName\" : \"Tom\",\n  \"homeTown\" : \"Washington\",\n  \"lastName\" : \"Smith\"\n}")
+                "{\n  \"age\" : 10,\n  \"date\" : \"1970-01-01T00:00:00.000+00:00\",\n  \"firstName\" : \"Tom\",\n  \"homeTown\" : \"Washington\",\n  \"lastName\" : \"Smith\"\n}")
         );
     }
 
@@ -100,6 +101,7 @@ public class JacksonJsonConverterTest {
         final JacksonJsonConverter<Entity> converter = JacksonJsonConverter.getInstanceWithObjectMapper(objectMapper);
         final String stringForm = converter.getStringForm(entity);
 
-        Assert.assertThat(stringForm, CoreMatchers.equalTo("{\n  \"age\" : 10,\n  \"firstName\" : \"Tom\"\n}"));
+        // TODO Jackson doesn't serialize Date(0) at all on Windows
+        Assert.assertThat(stringForm, CoreMatchers.equalTo("{\n  \"age\" : 10,\n  \"date\" : \"1970-01-01T00:00:00.000+00:00\",\n  \"firstName\" : \"Tom\"\n}"));
     }
 }

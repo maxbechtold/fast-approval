@@ -48,34 +48,34 @@ public class FirstWorkingReporterTest {
     @Test
     public void shouldCallNotTheSameForFirstSupportedReporter() throws Exception {
         when(second.canApprove(Mockito.any(File.class))).thenReturn(true);
-        when(third.canApprove(Mockito.any(File.class))).thenReturn(true);
-        new FirstWorkingReporter(first, second, third).notTheSame(null, null, null, null);
+        File fileMock = mock(File.class);
+        new FirstWorkingReporter(first, second, third).notTheSame(null, fileMock, null, fileMock);
 
-        verify(second, times(1)).notTheSame(null, null, null, null);
-        verify(third, never()).notTheSame(null, null, null, null);
+        verify(second, times(1)).notTheSame(null, fileMock, null, fileMock);
+        verify(third, never()).notTheSame(null, fileMock, null, fileMock);
     }
 
     @Test
     public void shouldCallApproveNewForFirstSupporterReporter() throws Exception {
         when(second.canApprove(Mockito.any(File.class))).thenReturn(true);
-        when(third.canApprove(Mockito.any(File.class))).thenReturn(true);
-        new FirstWorkingReporter(first, second, third).approveNew(null, null, null);
+        File fileMock = mock(File.class);
+        new FirstWorkingReporter(first, second, third).approveNew(null, fileMock, null);
 
-        verify(second, times(1)).approveNew(null, null, null);
-        verify(third, never()).approveNew(null, null, null);
+        verify(second, times(1)).approveNew(null, null, fileMock);
+        verify(third, never()).approveNew(null, null, fileMock);
     }
 
     @Test
     public void shouldCallCanApproveUntilItFindsAValidOne() throws Exception {
         when(second.canApprove(Mockito.any(File.class))).thenReturn(true);
-        when(third.canApprove(Mockito.any(File.class))).thenReturn(true);
 
-        final boolean canApprove = new FirstWorkingReporter(first, second, third).canApprove(null);
+        File fileMock = mock(File.class);
+        final boolean canApprove = new FirstWorkingReporter(first, second, third).canApprove(fileMock);
 
         assertThat(canApprove, is(true));
-        verify(first, times(1)).canApprove(null);
-        verify(second, times(1)).canApprove(null);
-        verify(third, never()).canApprove(null);
+        verify(first, times(1)).canApprove(fileMock);
+        verify(second, times(1)).canApprove(fileMock);
+        verify(third, never()).canApprove(fileMock);
     }
 
     @Test(expected = IllegalStateException.class)
