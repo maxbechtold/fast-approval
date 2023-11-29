@@ -41,6 +41,7 @@ public class ExecutableExistsOnPathTest {
         Assert.assertThat(new ExecutableExistsOnPath("non-existing-executable").execute(), CoreMatchers.equalTo(false));
 
         Assume.assumeTrue(CrossPlatformCommand.isUnix());
+        // FIXME Test is platform dependent
         Assert.assertThat(new ExecutableExistsOnPath("vim").execute(), CoreMatchers.equalTo(true));
     }
 }

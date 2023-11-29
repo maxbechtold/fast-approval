@@ -5,7 +5,6 @@
     <name>${project.groupId}:${project.artifactId}</name>
 
     <parent>
-        <relativePath>..</relativePath>
         <groupId>com.github.maxbechtold</groupId>
         <artifactId>fast-approval</artifactId>
         <version>0.6-SNAPSHOT</version>
@@ -18,26 +17,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <instrumentation>
-                        <ignores>
-                            <ignore>com.github.approval.reporters.*Reporters*</ignore>
-                            <ignore>com.github.approval.utils.*ExecutableExistsOnPath*</ignore>
-                        </ignores>
-                        <excludes>
-                            <exclude>com/github/approval/reporters/*Reporters*.class</exclude>
-                            <exclude>com/github/approval/utils/*ExecutableExistsOnPath*.class</exclude>
-                        </excludes>
-                    </instrumentation>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
