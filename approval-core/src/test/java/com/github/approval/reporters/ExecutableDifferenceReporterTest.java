@@ -97,10 +97,11 @@ public class ExecutableDifferenceReporterTest {
     @Test
     public void shouldNotThrowIfReporterExecutableExecutedExitedWithNonErrorValue() throws Exception {
         Process process = Mockito.mock(Process.class);
-        when(process.exitValue()).thenReturn(OK_CODE);
+        when(process.waitFor()).thenReturn(OK_CODE);
         doReturn(process).when(executableDifferenceReporter).startProcess(GVIM_EXECUTABLE, forApproval(testFile).getAbsolutePath(), testFile.file().getAbsolutePath());
 
         executableDifferenceReporter.approveNew("test content".getBytes(StandardCharsets.UTF_8), forApproval(testFile), testFile.file());
+        verify(process, times(1)).waitFor();
     }
 
     @Test(expected = AssertionError.class)
@@ -119,11 +120,12 @@ public class ExecutableDifferenceReporterTest {
     @Test
     public void shouldProperlyExecuteNotSameCommand() throws Exception {
         Process process = Mockito.mock(Process.class);
-        when(process.exitValue()).thenReturn(OK_CODE);
+        when(process.waitFor()).thenReturn(OK_CODE);
         doReturn(process).when(executableDifferenceReporter).startProcess(Mockito.any(String[].class));
         executableDifferenceReporter.notTheSame(RAW_VALUE, testFile.file(), (TestUtils.VALUE + " difference ").getBytes(StandardCharsets.UTF_8), forApproval(testFile));
 
         verify(executableDifferenceReporter).startProcess(GDIFFVIM_EXECUTABLE, forApproval(testFile).getAbsolutePath(), testFile.file().getAbsolutePath());
+        verify(process, times(1)).waitFor();
     }
 
     @Test(expected = IOException.class)

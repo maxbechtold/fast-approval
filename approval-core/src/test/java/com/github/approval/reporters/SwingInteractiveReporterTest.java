@@ -138,7 +138,6 @@ public class SwingInteractiveReporterTest {
     @Test(expected = AssertionError.class)
     public void shouldThrowIfCalledInHeadlessMode() throws Exception {
         //assign
-        doThrow(new AssertionError("error")).when(interactiveReporter).promptUser();
         doReturn(true).when(interactiveReporter).isHeadless();
 
         //act
@@ -146,6 +145,9 @@ public class SwingInteractiveReporterTest {
                 TestUtils.forApproval(testFile),
                 testFile.file()
         );
+
+        //assert
+        verify(interactiveReporter, never()).promptUser();
     }
 
 }
