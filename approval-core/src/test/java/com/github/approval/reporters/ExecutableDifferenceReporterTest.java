@@ -29,7 +29,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -62,7 +62,7 @@ public class ExecutableDifferenceReporterTest {
 
     @Test(expected = AssertionError.class)
     public void shouldThrowAssertionError_IfThereIsErrorWhileExecuting() throws Exception {
-        doThrow(new IOException("error in exec")).when(executableDifferenceReporter).startProcess(Mockito.<String>anyVararg());
+        doThrow(new IOException("error in exec")).when(executableDifferenceReporter).startProcess(Mockito.any(String[].class));
 
         executableDifferenceReporter.approveNew(RAW_VALUE, forApproval(testFile), testFile.file());
     }
@@ -105,7 +105,7 @@ public class ExecutableDifferenceReporterTest {
 
     @Test(expected = AssertionError.class)
     public void shouldThrowAssertionError_IfThereIsErrorWhileExecutingNotSame() throws Exception {
-        doThrow(new IOException("error in exec")).when(executableDifferenceReporter).startProcess(Mockito.<String>anyVararg());
+        doThrow(new IOException("error in exec")).when(executableDifferenceReporter).startProcess(Mockito.any(String[].class));
         executableDifferenceReporter.notTheSame(RAW_VALUE, testFile.file(), (TestUtils.VALUE + " difference ").getBytes(StandardCharsets.UTF_8), forApproval(testFile));
     }
 
@@ -120,7 +120,7 @@ public class ExecutableDifferenceReporterTest {
     public void shouldProperlyExecuteNotSameCommand() throws Exception {
         Process process = Mockito.mock(Process.class);
         when(process.exitValue()).thenReturn(OK_CODE);
-        doReturn(process).when(executableDifferenceReporter).startProcess(Mockito.<String>anyVararg());
+        doReturn(process).when(executableDifferenceReporter).startProcess(Mockito.any(String[].class));
         executableDifferenceReporter.notTheSame(RAW_VALUE, testFile.file(), (TestUtils.VALUE + " difference ").getBytes(StandardCharsets.UTF_8), forApproval(testFile));
 
         verify(executableDifferenceReporter).startProcess(GDIFFVIM_EXECUTABLE, forApproval(testFile).getAbsolutePath(), testFile.file().getAbsolutePath());

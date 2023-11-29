@@ -77,7 +77,7 @@ public class JacksonJsonConverterTest {
                 super(s);
             }
         }
-        Mockito.when(objectMapper.writeValueAsString(Mockito.anyObject())).thenThrow(new MyJacksonProccessingException("test exception"));
+        Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenThrow(new MyJacksonProccessingException("test exception"));
 
         final JacksonJsonConverter<Entity> converter = JacksonJsonConverter.getInstanceWithObjectMapper(objectMapper);
         final String stringForm = converter.getStringForm(entity);
