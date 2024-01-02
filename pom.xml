@@ -45,16 +45,17 @@
     <properties>
         <github.global.userName>maxbechtold</github.global.userName>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdkTarget>1.7</jdkTarget>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <guava.version>32.1.3-jre</guava.version>
     </properties>
 
     <scm>
         <connection>scm:git:git@github.com:maxbechtold/fast-approval.git</connection>
         <developerConnection>scm:git:git@github.com:maxbechtold/fast-approval.git</developerConnection>
-        <url>git@git@github.com:maxbechtold/fast-approval.git</url>
-      <tag>HEAD</tag>
-  </scm>
+        <url>https://github.com/maxbechtold/fast-approval</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <build>
         <plugins>
@@ -80,8 +81,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.21.0</version>
                 <configuration>
-                    <sourceEncoding>utf-8</sourceEncoding>
-                    <targetJdk>1.7</targetJdk>
+                    <targetJdk>1.8</targetJdk>
                 </configuration>
                 <executions>
                     <execution>
@@ -158,8 +158,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>${jdkTarget}</source>
-                    <target>${jdkTarget}</target>
                     <showWarnings>true</showWarnings>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
