@@ -29,8 +29,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: |
-        export OS_NAME=linux
-        mvn -B package --file pom.xml -D"os.name=linux"
+        mvn -e -X -B package --file pom.xml -D"os.name=linux"
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
