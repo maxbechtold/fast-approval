@@ -20,8 +20,11 @@ package com.github.approval.utils;
  * #L%
  */
 
+import org.junit.After;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import java.util.Locale;
 
 import static org.mockito.Mockito.verify;
 
@@ -31,6 +34,11 @@ import static org.mockito.Mockito.verify;
 public class CrossPlatformCommandTest {
 
     private TestClass instance;
+
+    @After
+    public void resetOS() {
+        CrossPlatformCommand.setOS(System.getProperty("os.name").toLowerCase(Locale.ENGLISH));
+    }
 
     public static class TestClass extends CrossPlatformCommand<Void> {
 
