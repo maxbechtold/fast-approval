@@ -22,44 +22,26 @@ package com.github.approval.sesame;
 
 
 import com.github.approval.Approvals;
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import org.junit.Test;
-import org.openrdf.model.Graph;
-import org.openrdf.model.Statement;
-import org.openrdf.model.ValueFactory;
-import org.openrdf.model.impl.StatementImpl;
-import org.openrdf.model.impl.TreeModel;
-import org.openrdf.model.impl.ValueFactoryImpl;
-import org.openrdf.query.QueryLanguage;
-import org.openrdf.query.TupleQueryResult;
-import org.openrdf.repository.Repository;
-import org.openrdf.repository.RepositoryException;
-import org.openrdf.repository.sail.SailRepository;
-import org.openrdf.sail.memory.MemoryStore;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.util.ModelBuilder;
+import org.eclipse.rdf4j.model.util.Values;
 
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Set;
 
 public class GraphConverterTest {
 
     @Test
     public void shouldProperlyConvertGraphToGraphVizModel() throws Exception {
-        ValueFactory v = new ValueFactoryImpl();
 
-        Graph graph = new TreeModel();
-        graph.add(v.createStatement(
-                v.createURI("http://test.urn"),
-                v.createURI("http://predicate"),
-                v.createLiteral("Test label")
-        ));
+        ModelBuilder builder = new ModelBuilder();
+        builder.subject(Values.iri("http://test.urn"))
+                .add(Values.iri("http://predicate"), Values.literal("Test label"));
 
-        graph.add(v.createStatement(
-                v.createURI("http://test.urn1"),
-                v.createURI("http://predicate1"),
-                v.createLiteral("Test label1")
-        ));
+        builder.subject(Values.iri("http://test.urn1"))
+                .add(Values.iri("http://predicate1"), Values.literal("Test label1"));
+
+        Model graph = builder.build();
 
         String stringForm = new GraphConverter().getStringForm(graph);
 

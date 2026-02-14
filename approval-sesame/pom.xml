@@ -10,9 +10,19 @@
   <name>${project.groupId}:${project.artifactId}</name>
   <dependencies>
       <dependency>
-          <groupId>org.openrdf.sesame</groupId>
-          <artifactId>sesame-runtime</artifactId>
-          <version>4.1.2</version>
+        <groupId>org.eclipse.rdf4j</groupId>
+        <artifactId>rdf4j-model</artifactId>
+        <version>3.7.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.rdf4j</groupId>
+        <artifactId>rdf4j-rio-turtle</artifactId>
+        <version>3.7.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.rdf4j</groupId>
+        <artifactId>rdf4j-rio-api</artifactId>
+        <version>3.7.4</version>
       </dependency>
       <dependency>
           <groupId>${project.groupId}</groupId>

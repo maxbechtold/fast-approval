@@ -21,8 +21,8 @@ package com.github.approval.sesame;
  */
 
 import com.github.approval.converters.AbstractStringConverter;
-import org.openrdf.model.Graph;
-import org.openrdf.model.Statement;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Statement;
 
 import javax.annotation.Nonnull;
 
@@ -34,10 +34,10 @@ import javax.annotation.Nonnull;
  * You most probably want to use this in cojection with {@link com.github.approval.sesame.GraphReporter}.
  * </p>
  */
-public class GraphConverter extends AbstractStringConverter<Graph> {
+public class GraphConverter extends AbstractStringConverter<Model> {
     @Nonnull
     @Override
-    protected String getStringForm(Graph value) {
+    protected String getStringForm(Model value) {
         StringBuilder statementsInDotFormat = new StringBuilder();
         for (Statement statement : value) {
             statementsInDotFormat.append(

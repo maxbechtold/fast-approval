@@ -24,32 +24,22 @@ package com.github.approval.sesame;
 import com.github.approval.Approval;
 import com.github.approval.Approvals;
 import org.junit.Test;
-import org.openrdf.model.Graph;
-import org.openrdf.model.ValueFactory;
-import org.openrdf.model.impl.TreeModel;
-import org.openrdf.model.impl.ValueFactoryImpl;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.util.ModelBuilder;
+import org.eclipse.rdf4j.model.util.Values;
 
 import java.nio.file.Paths;
 
 public class GraphReporterIT {
     @Test
     public void shouldProperlyConvertTheDotFormatAndThenReportItInConfigredApplication() throws Exception {
-        ValueFactory v = new ValueFactoryImpl();
 
-        Graph graph = new TreeModel();
-        graph.add(v.createStatement(
-                v.createURI("http://test.urn"),
-                v.createURI("http://predicate"),
-                v.createLiteral("Test label")
-        ));
+        ModelBuilder builder = new ModelBuilder();
+        builder.subject(Values.iri("http://test.urn")).add(Values.iri("http://predicate"), Values.literal("Test label"));
+        builder.subject(Values.iri("http://test.urn1")).add(Values.iri("http://predicate1"), Values.literal("Test label1"));
+        Model graph = builder.build();
 
-        graph.add(v.createStatement(
-                v.createURI("http://test.urn1"),
-                v.createURI("http://predicate1"),
-                v.createLiteral("Test label1")
-        ));
-
-        Approval<Graph> approval = Approval.of(Graph.class)
+        Approval<Model> approval = Approval.of(Model.class)
                 .withConverter(new GraphConverter())
                 .withReporter(GraphReporter.getInstance())
                 .build();
